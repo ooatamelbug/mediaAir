@@ -1,6 +1,6 @@
 import { Document } from 'mongoose';
 // create interface for media account
-export interface MediaInterface {
+export interface MediaInterface extends Document{
     _id?: string;
 
 }

@@ -1,5 +1,8 @@
 {
     "database":{
         "uri": "mongodb+srv://moh:tPxm99TyUhWgewbV@mediaair.7dizj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+    },
+    "jwt": {
+        "secret": "secretwebtologin"
     }
 }
