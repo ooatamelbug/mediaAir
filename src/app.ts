@@ -3,6 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 
+import { databaseConnect } from './startup/database';
 // make instance app from express function
 const app = express();
 
@@ -29,6 +30,8 @@ const optionCors: cors.CorsOptions = {
 app.use(cors(optionCors));
 // use the helmet 
 app.use(helmet());
+// connect to db
+databaseConnect.connect()
 
 // app listen to the port and run application
 app.listen( port,() => {
