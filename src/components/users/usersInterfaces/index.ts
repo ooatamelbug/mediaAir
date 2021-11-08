@@ -1,0 +1,1 @@
+export { UserMedelInterface, } from './userInterface';
