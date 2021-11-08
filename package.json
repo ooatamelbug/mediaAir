@@ -2,8 +2,9 @@
   "name": "mediaair",
   "version": "1.0.0",
   "description": "media air for soical api  ",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
+    "start": "npx tsc && nodemon build/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
