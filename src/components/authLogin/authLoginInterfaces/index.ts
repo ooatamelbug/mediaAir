@@ -1,1 +1,1 @@
-export { AuthLogin } from './authLogininterface';
+export { LoginAuthInterface } from './authLogininterface';

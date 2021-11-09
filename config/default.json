@@ -1,8 +1,9 @@
 {
     "database":{
-        "uri": "mongodb+srv://moh:tPxm99TyUhWgewbV@mediaair.7dizj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+        "uri": "mongodb+srv://moh:tPxm99TyUhWgewbV@mediaair.7dizj.mongodb.net/mediaDB?retryWrites=true&w=majority"
     },
     "jwt": {
-        "secret": "secretwebtologin"
+        "secret": "secretwebtologin",
+        "expireIn": "6h"
     }
 }

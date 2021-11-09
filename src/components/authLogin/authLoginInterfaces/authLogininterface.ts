@@ -3,7 +3,7 @@ import { UserMedelInterface } from './../../users/usersInterfaces/userInterface'
 import { Document, PopulatedDoc } from 'mongoose';
 
 // create interface for AuthLogin model
-export interface AuthLogin extends Document {
+export interface LoginAuthInterface extends Document {
     _id?: string;
     token?: string;
     status: boolean;
