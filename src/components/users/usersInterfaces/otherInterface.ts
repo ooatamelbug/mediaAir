@@ -24,10 +24,24 @@ interface BooksInterface extends Document {
     date: string;
 }
 
+export interface EducationParamInterface extends Document {
+    name: string;
+    date: Date;
+    place?: string;
+}
+
 export interface EducationsInterface extends Document {
+    elmantrySchool: EducationParamInterface
+    scondarySchool: EducationParamInterface
+    highSchool: EducationParamInterface
+}
+
+export interface EducationsCollageInterface extends Document {
     _id?: string;
     title: string;
     place: string;
+    degree: string;
+    collageName: string;
     date: Date;
 }
 

@@ -9,10 +9,17 @@ import { LoginAuth } from "../components/authLogin/authLoginSchema";
 import { LoginAuthInterface } from "../components/authLogin/authLoginInterfaces";
 
 // create type for custom Request
-interface RequestData extends Request {
+export interface RequestData extends Request {
     user : loginDataInterface
 }
 
+/**
+ * function for xheck auth token valid to go path
+ * @param req 
+ * @param res 
+ * @param next 
+ * @returns 
+ */
 export const checkJWT = async (
   req: RequestData,
   res: Response,
@@ -75,7 +82,7 @@ export const checkJWT = async (
       // return error message and with status code 401
       return res.status(401).json({
         success: false,
-        message: "error",
+        message: "error in handle data",
       });
     }
   } else {
