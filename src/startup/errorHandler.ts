@@ -3,7 +3,8 @@ import { ErrorExceptions } from './../global/interfaces/error';
 import {Request, Response, NextFunction } from 'express';
 
 // function for handel errror 
-export const handleError = async (
+export const handleError = () => {
+   return async (
     req: Request,
     res: Response,
     next: NextFunction,
@@ -23,4 +24,5 @@ export const handleError = async (
         timeError,
         pathError
       });
+    }
   }
