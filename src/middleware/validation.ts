@@ -3,7 +3,7 @@ import { ResponseInterface } from "./../global/interfaces/responseInterface";
 import { Schema } from "joi";
 import { Request, Response, NextFunction } from "express";
 
-export const middle = (schema: Schema, property: string) => {
+export const validateSchema = (schema: Schema, property: string) => {
   // return the function handle request validate
   return async (req: Request, res: Response, next: NextFunction) => {
     // create variable data for put data request in it
