@@ -4,6 +4,7 @@ import cors from "cors";
 import helmet from "helmet";
 import { json, urlencoded } from "body-parser";
 
+import { appRouter } from './startup/routes';
 import { handleError } from './startup/errorHandler';
 import { databaseConnect } from "./startup/database";
 // make instance app from express function
@@ -38,6 +39,9 @@ app.use(cors(optionCors));
 app.use(helmet());
 // connect to db
 databaseConnect.connect();
+
+// pass app to appRouter to use the route
+appRouter(app);
 
 // app use handel error function
 app.use(handleError);

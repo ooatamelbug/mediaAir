@@ -35,34 +35,49 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.databaseConnect = void 0;
-// import monggose and config
-var mongoose_1 = __importDefault(require("mongoose"));
-var config_1 = __importDefault(require("config"));
-// create connect to database  
-exports.databaseConnect = {
-    connect: function () { return __awaiter(void 0, void 0, void 0, function () {
-        var uri;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    uri = config_1.default.get('database.uri');
-                    console.log(uri);
-                    // create connect 
-                    return [4 /*yield*/, mongoose_1.default.connect(uri, {}, function (err) {
-                            if (err)
-                                throw err;
-                            console.log("conenct");
-                        })];
-                case 1:
-                    // create connect 
-                    _a.sent();
-                    return [2 /*return*/];
-            }
+var usersSchema_1 = require("../usersSchema");
+var Users = /** @class */ (function () {
+    function Users() {
+    }
+    Users.getUsers = function (params) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, statusCode, skip, sort, limit, skipData, limitData, select, userdata, error_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        response = {};
+                        statusCode = 200;
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        skip = params.skip, sort = params.sort, limit = params.limit;
+                        skipData = skip ? skip : 0;
+                        limitData = limit ? limit : 10;
+                        select = "-password";
+                        return [4 /*yield*/, usersSchema_1.User.find({}, select)
+                                .limit(limitData)
+                                .sort(sort)
+                                .skip(skipData)];
+                    case 2:
+                        userdata = _a.sent();
+                        // pass data and  statusCode value and message
+                        statusCode = 200;
+                        response.data = userdata;
+                        response.message = "";
+                        return [3 /*break*/, 4];
+                    case 3:
+                        error_1 = _a.sent();
+                        // change the  statusCode to 500 and add message to response
+                        statusCode = 500;
+                        response.message = "error in data";
+                        return [3 /*break*/, 4];
+                    case 4: 
+                    // return the response and statusCode
+                    return [2 /*return*/, { response: response, statusCode: statusCode }];
+                }
+            });
         });
-    }); }
-};
+    };
+    return Users;
+}());

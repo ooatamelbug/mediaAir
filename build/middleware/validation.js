@@ -35,34 +35,41 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.databaseConnect = void 0;
-// import monggose and config
-var mongoose_1 = __importDefault(require("mongoose"));
-var config_1 = __importDefault(require("config"));
-// create connect to database  
-exports.databaseConnect = {
-    connect: function () { return __awaiter(void 0, void 0, void 0, function () {
-        var uri;
+exports.validateSchema = void 0;
+var validateSchema = function (schema, property) {
+    // return the function handle request validate
+    return function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+        var data, result, responseData;
         return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    uri = config_1.default.get('database.uri');
-                    console.log(uri);
-                    // create connect 
-                    return [4 /*yield*/, mongoose_1.default.connect(uri, {}, function (err) {
-                            if (err)
-                                throw err;
-                            console.log("conenct");
-                        })];
-                case 1:
-                    // create connect 
-                    _a.sent();
-                    return [2 /*return*/];
+            data = {};
+            // check if request of property is exiest and it have values
+            if (req[property] &&
+                Object.keys(req[property]).length > 0) {
+                // put this request of property in data
+                data = req[property];
             }
+            result = schema.validate(data, {
+                abortEarly: false,
+                allowUnknown: false,
+                convert: true,
+            });
+            // check if result have error
+            if (result.error) {
+                responseData = {
+                    success: false,
+                    message: "",
+                    data: [result.error],
+                };
+                // return Response with status and responseData
+                return [2 /*return*/, res.status(422).json(responseData)];
+            }
+            else {
+                // move to the next step
+                next();
+            }
+            return [2 /*return*/];
         });
-    }); }
+    }); };
 };
+exports.validateSchema = validateSchema;

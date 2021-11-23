@@ -35,34 +35,25 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.databaseConnect = void 0;
-// import monggose and config
-var mongoose_1 = __importDefault(require("mongoose"));
-var config_1 = __importDefault(require("config"));
-// create connect to database  
-exports.databaseConnect = {
-    connect: function () { return __awaiter(void 0, void 0, void 0, function () {
-        var uri;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    uri = config_1.default.get('database.uri');
-                    console.log(uri);
-                    // create connect 
-                    return [4 /*yield*/, mongoose_1.default.connect(uri, {}, function (err) {
-                            if (err)
-                                throw err;
-                            console.log("conenct");
-                        })];
-                case 1:
-                    // create connect 
-                    _a.sent();
-                    return [2 /*return*/];
-            }
-        });
-    }); }
-};
+exports.loginUser = void 0;
+var authLogServices_1 = require("./../authLogServices");
+/**
+ * this
+ * @param req
+ * @param res
+ * @returns
+ */
+var loginUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var result;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, authLogServices_1.Auth.userLogin(req.body)];
+            case 1:
+                result = _a.sent();
+                // pass the result to the res and statusCode and data response
+                return [2 /*return*/, res.status(result.statusCode).json(result.response)];
+        }
+    });
+}); };
+exports.loginUser = loginUser;

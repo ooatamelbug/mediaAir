@@ -61,7 +61,7 @@ export class Auth {
             status: true,
           });
           await newLogin.save();
-          // 
+          // response data and statusCode that will return
           statusCode = 200;
           response.message = "";
           response.token = token;

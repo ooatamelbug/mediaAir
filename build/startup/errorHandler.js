@@ -35,34 +35,27 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.databaseConnect = void 0;
-// import monggose and config
-var mongoose_1 = __importDefault(require("mongoose"));
-var config_1 = __importDefault(require("config"));
-// create connect to database  
-exports.databaseConnect = {
-    connect: function () { return __awaiter(void 0, void 0, void 0, function () {
-        var uri;
+exports.handleError = void 0;
+// function for handel errror 
+var handleError = function () {
+    return function (req, res, next, error) { return __awaiter(void 0, void 0, void 0, function () {
+        var statusError, messageError, DataError, timeError, pathError;
         return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    uri = config_1.default.get('database.uri');
-                    console.log(uri);
-                    // create connect 
-                    return [4 /*yield*/, mongoose_1.default.connect(uri, {}, function (err) {
-                            if (err)
-                                throw err;
-                            console.log("conenct");
-                        })];
-                case 1:
-                    // create connect 
-                    _a.sent();
-                    return [2 /*return*/];
-            }
+            statusError = req.statusCode || 500;
+            messageError = error.message;
+            DataError = error.data;
+            timeError = new Date().toISOString();
+            pathError = req.originalUrl;
+            // get out the error data and ststus and other related data
+            res.status(statusError).json({
+                messageError: messageError,
+                DataError: DataError,
+                timeError: timeError,
+                pathError: pathError
+            });
+            return [2 /*return*/];
         });
-    }); }
+    }); };
 };
+exports.handleError = handleError;
